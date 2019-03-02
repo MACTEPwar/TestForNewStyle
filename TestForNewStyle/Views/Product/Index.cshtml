@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TestForNewStyle.Models.Product>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/js/ProductCRUD.js"></script>
+    <script>
+        let products = JSON.parse('@Json.Serialize(Model)');
+    </script>
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Продукт
+                </th>
+            </tr>
+        </thead>
+        <tbody id="productTbody">
+            <tr>
+                <td><input type="text" class="btn-block form-control" id="inputProductTitle" autocomplete="off"></td>
+                <td class="text-center">
+                    <a class="btn btn-success btnProductCreate">Добавить</a>
+                    <a class="btn btn-danger btnProductClear">Очистить</a>
+                </td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="display:none" class="product_id">@item.Id</td>
+                    <td>
+                        <div class="view-row">
+                            <div class="product_title">@Html.DisplayFor(modelItem => item.Title)</div>
+                        </div>
+                        <div class="update-row">
+                            <input type="text" class="btn-block form-control inputUpdateTitleProduct" autocomplete="off">
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <div class="view-row">
+                            <a class="btn btn-warning btnProductUpdate">Изменить</a>
+                            <a class="btn btn-danger btnProductDelete">Удалить</a>
+                        </div>
+                        <div class="update-row" style="display:none">
+                            <a class="btn btn-success btnProductSave">Сохранить</a>
+                            <a class="btn btn-danger btnProductCancel">Отмена</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

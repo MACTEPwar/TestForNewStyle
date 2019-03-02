@@ -1,0 +1,61 @@
+﻿
+@model IEnumerable<TestForNewStyle.Models.Expense>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<script src="~/js/expenseView.js"></script>
+
+@foreach (Expense e in Model)
+{
+    <div class="row m-4 p-2 bg-light border border-dark rounded expenseViewRow">
+        <div class="col">
+            <div class="row font-weight-bold">
+                <div class="col-md-6 text-left">
+                    <div class="row">№ <div name="id">@e.Id </div></div>
+                    <div>@e.Client.Name</div>
+                </div>
+                <div class="col-md-6 text-right">
+                    <div>@e.ExpenseCreated</div>
+                </div>
+            </div>
+            <div>
+                <table class="table table-responsive-sm m-0 my-2 table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Код</th>
+                            <th>Продукт</th>
+                            <th>Количество</th>
+                            <th>Цена</th>
+                            <th>Сумма</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Content c in e.Contents)
+                        {
+                            <tr>
+                                <td>@c.Code</td>
+                                <td>@c.Product.Title</td>
+                                <td>@c.Count</td>
+                                <td>@c.Price</td>
+                                <td>@c.Sum</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="var d-none" name="ExpenseStatus">@e.ExpenseStatus</div>
+                <div class="row font-weight-bold">
+                    <div class="col">ОБЩАЯ СУММА: @e.Sum</div>
+                    <div class="col text-right ">@e.ExpenseStatus  @e.Date</div>
+                </div>
+                <div class="row buttonForEdit d-none">
+                    <div class="col  text-right">
+                        <button class="btn btn-outline-warning btnUpdateExpense">Изменить</button>
+                        <button class="btn btn-outline-danger btnDeleteExpense">Удалить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

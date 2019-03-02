@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Создание расхода";
+}
+<script src="~/js/expense.js"></script>
+<h2 class="mt-2">@ViewData["Title"]</h2>
+
+<h4>Расход</h4>
+<hr />
+<div class="row text-left">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="selected_client_span">Клиент</span>
+        </div>
+        <select class="form-control-lg" id="selected_client" aria-describedby="selected_client_span">
+            @foreach (Client c in ViewBag.clients)
+            {
+                <option value="@c.Id">@c.Name</option>
+            }
+        </select>
+    </div>
+</div>
+<div id="tableExpenses">
+    <div class="row">
+        <div class="col">Код</div>
+        <div class="col">Товар</div>
+        <div class="col">Количество</div>
+        <div class="col">Цена</div>
+        <div class="col">Сумма</div>
+        <div class="col text-center">#</div>
+        <div class="col text-center">#</div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" id="inputExpenseCode" />
+        </div>
+        <div class="col">
+            <select class="form-control" id="selected_product">
+                @foreach (Product p in ViewBag.products)
+                {
+                    <option value="@p.Id">@p.Title</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" id="inputExpenseCount" />
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" id="inputExpensePrice" />
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+            <button class="btn btn-block btn-outline-success" id="btnAddingExpenseToTable">Добавить</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-block btn-outline-danger" id="btnClearEditCol">Очистить</button>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="d-flex">
+    <div class="row h4 mr-auto">СУММА: <div class="ml-2" id="amountExpense"> 0</div>грн.</div>
+    <div>
+        <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-outline-success" id="btnExpenseHold">ПРОВЕСТИ</button>
+            <button type="button" class="btn btn-outline-warning" id="btnExpenseDelayed">ОТЛОЖИТЬ</button>
+            <button type="button" class="btn btn-outline-danger" id="btnExpenseCanseled">ОТМЕНИТЬ</button>
+        </div>
+    </div>
+</div>
+

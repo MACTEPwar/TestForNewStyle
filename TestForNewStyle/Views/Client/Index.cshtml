@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TestForNewStyle.Models.Client>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/js/ClientCRUD.js"></script>
+    <script>
+        let clients = JSON.parse('@Json.Serialize(Model)');
+    </script>
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Клиент
+                </th>
+            </tr>
+        </thead>
+        <tbody id="clientTbody">
+            <tr>
+                <td><input type="text" class="btn-block form-control" id="inputClientName" autocomplete="off"></td>
+                <td class="text-center">
+                    <a class="btn btn-success btnClientCreate">Добавить</a>
+                    <a class="btn btn-danger btnClientClear">Очистить</a>
+                </td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="display:none" class="client_id">@item.Id</td>
+                    <td>
+                        <div class="view-row">
+                            <div class="client_name">@Html.DisplayFor(modelItem => item.Name)</div>
+                        </div>
+                        <div class="update-row">
+                            <input type="text" class="btn-block form-control inputUpdateNameClient" autocomplete="off">
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <div class="view-row">
+                            <a class="btn btn-warning btnClientUpdate">Изменить</a>
+                            <a class="btn btn-danger btnClientDelete">Удалить</a>
+                        </div>
+                        <div class="update-row" style="display:none">
+                            <a class="btn btn-success btnClientSave">Сохранить</a>
+                            <a class="btn btn-danger btnClientCancel">Отмена</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
